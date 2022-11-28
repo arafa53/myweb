@@ -1,0 +1,241 @@
+{% extends 'shop/basic.html'  %}
+
+{% block title %}Productview {% endblock %}
+
+
+
+
+
+{% block body %}
+{% block css%} 
+<style>
+ .row {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+  margin: 0 -16px;
+}
+
+.col-25 {
+  -ms-flex: 25%; /* IE10 */
+  flex: 25%;
+}
+
+.col-50 {
+  -ms-flex: 50%; /* IE10 */
+  flex: 50%;
+}
+
+.col-75 {
+  -ms-flex: 75%; /* IE10 */
+  flex: 75%;
+}
+
+.col-25,
+.col-50,
+.col-75 {
+  padding: 0 16px;
+}
+
+.container {
+
+  padding: 5px 20px 15px 20px;
+  
+  border-radius: 3px;
+}
+
+input[type=text] {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+label {
+  margin-bottom: 10px;
+  display: block;
+}
+
+.icon-container {
+  margin-bottom: 20px;
+  padding: 7px 0;
+  font-size: 24px;
+}
+
+.btn {
+  background-color: #04AA6D;
+  color: white;
+ 
+  
+  border: none;
+  width: 100%;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 17px;
+}
+
+.btn:hover {
+  background-color: #45a049;
+}
+
+span.price {
+  float: right;
+  color: grey;
+}
+.del{
+  margin-top: 20px;
+  border-top: 1px solid rgb(51, 212, 7);
+}
+
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (and change the direction - make the "cart" column go on top) */
+@media (max-width: 800px) {
+  .row {
+    flex-direction: column-reverse;
+  }
+  .col-25 {
+    margin-bottom: 20px;
+  }
+}   
+       
+   
+
+
+</style>
+    
+{% endblock%}
+
+
+
+
+
+{% load static %}
+
+
+
+<div class="row my-4">
+    <div class="col-50">
+      <div class="container">
+        <form action="/shop/cheackout" method="post">
+          {% csrf_token %}
+  
+          <div class="row">
+            <div class="col-50">
+              <h3>Billing Address</h3>
+              <label for="fname"><i class="fa fa-user"></i> Full Name</label>
+              <input type="text" id="name" name="name" placeholder="Enter your name" required>
+              <label for="email"><i class="fa fa-envelope"></i> Email</label>
+              <input type="text" id="email" name="email" placeholder="abcd@example.com" required>
+              <label for="adr"><i class="fa-solid fa-location-dot"></i> Address</label>
+              <input type="text" id="address" name="address" placeholder="Enter your address" required>
+              <label for="city"><i class="fa-solid fa-phone"></i> Phone number</label>
+              <input type="text" id="phone" name="phone" placeholder="Enter phone number" required>
+              <label for="city"><i class="fa fa-institution"></i> City</label>
+              <input type="text" id="city" name="city" placeholder="Dhaka" required>
+              
+  
+              <div class="row">
+                <div class="col-50">
+                  <label for="state">State</label>
+                  <input type="text" id="state" name="state" placeholder="NY">
+                </div>
+                <div class="col-50">
+                  <label for="zip">Zip</label>
+                  <input type="text" id="zip_code" name="zip_code" placeholder="10001">
+                </div>
+              </div>
+            </div>
+  
+       
+          </div>
+          <label>
+            <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
+          </label>
+          <input type="submit" value="Place order" class="btn">
+        </form>
+      </div>
+    </div>
+  
+    <div class="col-50">
+      <div class="container">
+        <div class="container h-100 py-5">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+              <div class="col-10">
+        
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                  <h3 class="fw-normal mb-0 text-black">Shopping Cart</h3>
+               
+                </div>
+                {% for key,value in request.session.cart.items %}
+        
+                <div class="card rounded-3 mb-4">
+                  <div class="card-body p-4">
+                    <div class="row d-flex justify-content-between align-items-center">
+                      <div class="col-md-4 col-lg-4 col-xl-4">
+                        <img
+                          src="{{value.image}}"
+                          class="img-fluid max-width:100%" alt="Cotton T-shirt">
+                      </div>
+                      <div class="col-md-3 col-lg-3 col-xl-3">
+                        <p class="lead fw-normal mb-2">{{value.name}}</p>
+                        <p><span class="text-muted">Size: </span>M <span class="text-muted">Color: </span>Grey <span class="text-muted">Quantity: </span>{{value.quantity}}</p>
+                      </div>
+                    
+                    
+                      <div class="card-total col-md-1 col-lg-1 col-xl-1 text-end">
+                        <a href="{% url 'item_clear' key %}" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+      
+            
+                <div class="card bg-primary text-white rounded-3">
+                  <div class="card-body">
+                   
+                    
+
+                    <hr class="my-4">
+
+                    <div class="d-flex justify-content-between">
+                      <p class="mb-2">Subtotal</p>
+                      <p class="mb-2">{{cart_total_amount}} Tk</p>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                      <p class="mb-2">Shipping</p>
+                      <p class="mb-2">70 tk</p>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-4">
+                      <p class="mb-2">Total(Incl. taxes)</p>
+                      <p class="mb-2">{{cart_total_amount|add:70}}</p>
+                    </div>
+
+                    
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+
+
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+{% endblock%}

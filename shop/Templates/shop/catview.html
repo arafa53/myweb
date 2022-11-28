@@ -1,0 +1,284 @@
+{% extends 'shop/basic.html'  %}
+
+{% block title %}Service {% endblock %}
+
+
+
+
+
+{% block body %}
+{% block css%} 
+<style>
+    h1{
+        text-align: center;
+        font-weight: 700;
+    }
+    .responsive {
+  width: 100%;
+  height: 400px;
+}
+
+
+.border{
+    border: none;
+    padding: 20px;
+    margin: 50px;
+    background-color: rgba(237, 38, 38, 0.83);
+    border-radius: 10px 10px;
+    color: white;
+}
+.pagination {
+        margin-top: 20px;
+    }
+   .card-img-top{
+    height:200px;
+    width:225px;
+   }
+   .list-group-item a{
+    text-decoration: none;
+
+   }
+   .card-header{
+    background-color:#FF6A3D;
+    color: white;
+   }
+   .jumbotron-heading{
+    margin: 10px 0 30px 0;
+   }
+
+
+   @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700|Roboto+Condensed");
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+a {
+  color: black;
+}
+
+.vertical-nav li {
+  list-style: none;
+
+  
+  border-bottom: solid 1px #f2f5ff;
+  text-align: center;
+  position: relative;
+  flex-grow: 1;
+ 
+  display: flex;
+}
+.vertical-nav li:last-child {
+  border: none;
+}
+.vertical-nav li a {
+
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+  justify-content: center;
+  transition: all 0.2s ease;
+  font-weight: 600;
+  
+
+}
+.cats2{
+  margin: 1px 0 1px 0;
+}
+.vertical-nav li:hover > a {
+  background: #fafafa;
+  color: #FF6A3D;
+  transition: all 0.2s ease;
+}
+.vertical-nav li:hover > a .feather {
+  transform: scale(1.1);
+  transition: all 0.2s ease;
+}
+.vertical-nav li:hover > .hover-menu,
+.vertical-nav li:focus-within > .hover-menu {
+  visibility: visible;
+  opacity: 1;
+ 
+  transition: all 0.5s ease;
+  display: block;
+}
+.vertical-nav li .hover-menu {
+  background: white;
+  visibility: hidden;
+  transition: all 0.5s ease;
+  opacity: 0;
+  display: none;
+  position: absolute;
+  left: 200px;
+  min-width: 200px;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  box-shadow: 0 0 40px #00000021;
+}
+.vertical-nav li .hover-menu:after {
+  right: 100%;
+  top: 20%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: relative;
+  pointer-events: none;
+  border-color: rgba(255, 255, 255, 0);
+  border-right-color: #ffffff;
+  border-width: 10px;
+  margin-top: -10px;
+}
+.vertical-nav li .hover-menu ul {
+  margin: 0;
+  padding: 0;
+}
+
+.vertical-nav li .hover-menu ul li a {
+  width: 100%;
+  display: block !important;
+  text-decoration: none;
+  padding: 10px;
+  text-align: center;
+  height: auto !important;
+  font-weight: 600;
+}
+.vertical-nav li .hover-menu ul li a:hover {
+  background: #fafafa;
+  transition: 0.3s ease;
+}
+.menu-container{
+  z-index: 999999;
+ 
+ 
+}
+
+
+
+
+</style>
+    
+{% endblock%}
+
+
+
+
+{% load static %}
+
+<section class="jumbotron text-center">
+  <div class="container">
+      <h1 class="jumbotron-heading">Product list</h1>
+      
+  </div>
+</section>
+
+
+  <div class="row m-2">
+
+    <div class="row m-2">
+
+
+
+      <div class="col-12 col-sm-3">
+          <div class="card  mb-3">
+            <div class="card-header fw-bold   text-uppercase"><i class="fa fa-list "></i> Categories</div>
+            {% for cat in main_category %}
+            <div class="menu-container">
+              <ul class="vertical-nav">
+                <li>
+                  <a class="cats2" href="#"> {{cat.name}}</a>
+                  <div class="hover-menu">
+                    <ul>
+                      {% for i in cat.sub_category_set.all %}
+                      <li><a href="/shop/catview?main_category={{i.id}}">{{i.name}}</a></li>
+                      {% endfor %}
+                     
+                    </ul>
+                  </div>
+                </li>
+             </div>
+             {% endfor %}
+               
+          </div>
+          
+  
+      </div>
+
+
+
+
+
+      
+      <div class="col">
+      
+          <div class="row ">
+              
+
+              
+            {% for product in allproduct %}
+  
+              <div class="col-6 col-sm-6 col-md-6 col-lg-3">
+               
+                  <div class="card">
+                      <img class="card-img-top " src='/media/{{product.image}}' alt="Card image cap">
+                      <div class="card-body">
+                          <h4 class="card-title">{{product.name}}</h4>
+                          <p class="card-text">{{product.des |truncatechars:50}}</p>
+                          <p class="card-text">{{product.time}}</p>
+                          <div class="row">
+                              <div class="col">
+                                {% if user.is_authenticated  %}
+                                  <a class=" btn btn-primary" href="{% url 'cart_add' product.id %}">Add 2 cart</a>
+                                  {% else  %}
+                                  <a class=" btn btn-primary" href="/shop/my_account">Add 2 cart</a>
+                                  {% endif %}
+                                  <a  class="btn btn-danger ">{{product.price}} Tk</a>
+                                </div>
+                                
+                              </div>
+                              
+                          </div>
+                      </div>    
+                         
+                  </div>
+                  {% endfor %} 
+              </div>
+             
+      
+              <div class="col-12">
+                  <nav aria-label="...">
+                      <ul class="pagination">
+                        {% if allproduct.has_previous  %}
+                          <li class="page-item">
+                              <a class="page-link" href="/shop/?page=1" tabindex="-1">First</a>
+                          </li>
+                          <li class="page-item">
+                            <a class="page-link" href="/shop/?page={{allproduct.previous_page_number}}" tabindex="-1">Previous</a>
+                        </li>
+                        {% endif %}
+
+                        {% for n in totalpagelist %}
+                          <li class="page-item"><a class="page-link" href="/shop/?page={{n}}">{{n}}</a></li>
+                          {% endfor %}
+                          {% if allproduct.has_next  %}
+                          <li class="page-item">
+                              <a class="page-link" href="/shop/?page={{allproduct.next_page_number}}">Next</a>
+                          </li>
+                          {% endif %}
+                      </ul>
+                  </nav>
+              </div>
+          </div>
+      </div>
+
+
+
+
+
+
+
+
+
+{% endblock %}

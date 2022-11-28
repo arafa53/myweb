@@ -1,0 +1,496 @@
+
+{% extends 'shop\basic.html' %}
+
+{% block title %}Homepage {% endblock %}
+
+
+
+
+<!-- Messenger Chat Plugin Code -->
+
+{% block body %}
+
+
+
+
+
+
+{% block css%}
+
+<style>
+      *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .d-block {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+      
+        height: 25rem;
+}
+      ping{
+        color:whitesmoke;
+      }
+     d-img-top{
+        height: 15rem;
+        height: 15rem;
+      }
+      .form-control{
+        width: 22rem;
+      }
+      .back{
+        background-color: rgba(241, 241, 241, 0.615);
+      }
+    .back{
+      top: 20px;
+    }
+    .footer{
+      background-color: #24262b;
+      padding:70px 0 ;
+    }
+    
+    ul{
+
+    list-style: none;
+  
+    }
+    .row{
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .footer-col{
+      width: 25%;
+      padding: 0 15x;
+    }
+
+    .footer-col h4{
+      font-size: 18px;
+      color: #ffffff;
+      text-transform: capitalize;
+      margin-left: 30px;
+      margin-bottom: 30px;
+      font-weight: 750;
+      position: relative;
+    }
+
+    .footer-col h4::before{
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -10px;
+      background-color: #1ee928dc;
+      height: 2px;
+      box-sizing: border-box;
+      width: 50px;
+    }
+    .footer-col ul li:not(last-child){
+      margin-bottom: 10px;
+    }
+
+    .footer-col ul li a{
+      font-size: 16px;
+      text-transform: capitalize;
+      color-interpolation-filters: #ffffff;
+      text-decoration: none;
+      font-weight: 500;
+      color: #bbbbbb;
+      display: block;
+      transition:all 0.3s ease;
+    }   
+    
+    .footer-col ul li a:hover{
+      color: #FF6A3D;
+      padding-left: 10px;
+
+    }
+    .color{
+      color: #ffffff;
+    }
+    .footer-col .social-link a{
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255, 255, 255, 0.2);
+      margin: 0 10px 30px ;
+      text-align: center;
+      border-radius: 50%;
+      line-height: 40px;
+      transition: all 0.3s ease;
+    }
+    .footer-col .social-link a:hover{
+      color: #24262b;
+      background-color: #1ee928dc;
+    }
+    .fa-solid{
+      color: rgb(254, 254, 254);
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255, 255, 255, 0.2);
+      margin: 0 10px 30px ;
+      text-align: center;
+      border-radius: 50%;
+      line-height: 40px;
+      transition: all 0.3s ease;
+    }
+    span{
+      color: #bbbbbb;
+      font-weight: bold;
+    }
+    .card {
+        margin-top: 10px;
+       
+       
+    }
+   
+    
+
+
+    .pagination {
+        margin-top: 20px;
+    }
+   .card-img-top{
+    height:200px;
+    width:225px;
+   }
+   .list-group-item a{
+    text-decoration: none;
+
+   }
+   .card-header{
+    background-color:#FF6A3D;
+    color: white;
+   }
+   .alert{
+    margin-top: 20px;
+    background-color: #e6e6e7;
+    color: black;
+    font-weight: bold;
+    font-size: 1.2rem;
+    z-index: -1;
+   }
+
+
+   @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700|Roboto+Condensed");
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+a {
+  color: black;
+}
+
+.vertical-nav li {
+  list-style: none;
+
+  
+  border-bottom: solid 1px #f2f5ff;
+  text-align: center;
+  position: relative;
+  flex-grow: 1;
+ 
+  display: flex;
+}
+.vertical-nav li:last-child {
+  border: none;
+}
+.vertical-nav li a {
+
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+  justify-content: center;
+  transition: all 0.2s ease;
+  font-weight: 600;
+  
+
+}
+.cats2{
+  margin: 1px 0 1px 0;
+}
+.vertical-nav li:hover > a {
+  background: #fafafa;
+  color: #FF6A3D;
+  transition: all 0.2s ease;
+}
+.vertical-nav li:hover > a .feather {
+  transform: scale(1.1);
+  transition: all 0.2s ease;
+}
+.vertical-nav li:hover > .hover-menu,
+.vertical-nav li:focus-within > .hover-menu {
+  visibility: visible;
+  opacity: 1;
+ 
+  transition: all 0.5s ease;
+  display: block;
+}
+.vertical-nav li .hover-menu {
+  background: white;
+  visibility: hidden;
+  transition: all 0.5s ease;
+  opacity: 0;
+  display: none;
+  position: absolute;
+  left: 200px;
+  min-width: 200px;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  box-shadow: 0 0 40px #00000021;
+}
+.vertical-nav li .hover-menu:after {
+  right: 100%;
+  top: 20%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: relative;
+  pointer-events: none;
+  border-color: rgba(255, 255, 255, 0);
+  border-right-color: #ffffff;
+  border-width: 10px;
+  margin-top: -10px;
+}
+.vertical-nav li .hover-menu ul {
+  margin: 0;
+  padding: 0;
+}
+
+.vertical-nav li .hover-menu ul li a {
+  width: 100%;
+  display: block !important;
+  text-decoration: none;
+  padding: 10px;
+  text-align: center;
+  height: auto !important;
+  font-weight: 600;
+}
+.vertical-nav li .hover-menu ul li a:hover {
+  background: #fafafa;
+  transition: 0.3s ease;
+}
+.menu-container{
+  z-index: 999999;
+ 
+ 
+}
+.chats{
+  height: 50px;
+  width: 50px;
+  
+}
+
+
+
+
+
+  
+</style>
+{% endblock%}
+
+
+
+
+
+
+
+
+
+{% load static %}
+<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active" data-bs-interval="2000">
+      <img src='{% static "shop/slidebar/1.png" %}' class="d-block w-100 " alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="ping">First slide label</h5>
+        <p class="ping">Some representative placeholder content for the first slide.</p>
+      </div>
+    </div>
+    <div class="carousel-item" data-bs-interval="2000">
+      <img src='{% static "shop/slidebar/2.jpg" %}' class="d-block w-100 " alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="ping">Second slide label</h5>
+        <p class="ping">Some representative placeholder content for the second slide.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src='{% static "shop/slidebar/3.png" %}' class="d-block w-100 " alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 class="ping">Third slide label</h5>
+        <p class="ping">Some representative placeholder content for the third slide.</p>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+
+
+
+
+
+
+
+
+
+<section class="jumbotron text-center">
+  <div class="container">
+      <h1 class="jumbotron-heading">Product list</h1>
+      
+  </div>
+</section>
+
+
+  <div class="row m-2">
+
+
+
+      <div class="col-12 col-sm-3">
+          <div class="card  mb-3">
+            <div class="card-header fw-bold   text-uppercase"><i class="fa fa-list "></i> Categories</div>
+            {% for cat in main_category %}
+            <div class="menu-container">
+              <ul class="vertical-nav">
+                <li>
+                  <a class="cats2" href="#"> {{cat.name}}</a>
+                  <div class="hover-menu">
+                    <ul>
+                      {% for i in cat.sub_category_set.all %}
+                      <li><a href="/shop/catview?main_category={{i.id}}">{{i.name}}</a></li>
+                      {% endfor %}
+                     
+                    </ul>
+                  </div>
+                </li>
+             </div>
+             {% endfor %}
+               
+               
+               
+          </div>
+
+
+         <a style="font-weight:bold ; " href="//www.facebook.com//cb.jhalak "> <img class="chats" src="/media/shop/images/messenger.png" alt="ffff">      Chat us</a>
+          
+  
+      </div>
+      
+      <div class="col">
+        
+
+        {% for items in main_category %}
+
+          <div class="row ">
+           
+            <div class="alert " role="alert">{{items.name}}</div>
+
+              
+            {% for product in items.cat_product %}
+  
+              <div class="col-6 col-sm-6 col-md-6 col-lg-3">
+               
+                  <div class="card">
+                      <img class="card-img-top " src='/media/{{product.image}}' alt="Card image cap">
+                      <div class="card-body">
+                          <h4 class="card-title">{{product.name}}</h4>
+                          <p class="card-text">{{product.des |truncatechars:50}}</p>
+                          <p class="card-text">{{product.time}}</p>
+                          <div class="row">
+                              <div class="col">
+                                {% if user.is_authenticated  %}
+                                  <a class=" btn btn-primary" href="{% url 'cart_add' product.id %}">Add 2 cart</a>
+                                  {% else  %}
+                                  <a class=" btn btn-primary" href="/shop/my_account">Add 2 cart</a>
+                                  {% endif %}
+                                  <a  class="btn btn-danger ">{{product.price}} Tk</a>
+                                </div>
+                                
+                              </div>
+                              
+                          </div>
+                      </div>        
+                  </div>
+                  {% endfor %}
+              </div>
+              {% endfor %}
+      
+              <div class="col-12">
+                  <nav aria-label="...">
+                      <ul class="pagination">
+                        {% if allproduct.has_previous  %}
+                          <li class="page-item">
+                              <a class="page-link" href="/shop/?page=1" tabindex="-1">First</a>
+                          </li>
+                          <li class="page-item">
+                            <a class="page-link" href="/shop/?page={{allproduct.previous_page_number}}" tabindex="-1">Previous</a>
+                        </li>
+                        {% endif %}
+
+                        {% for n in totalpagelist %}
+                          <li class="page-item"><a class="page-link" href="/shop/?page={{n}}">{{n}}</a></li>
+                          {% endfor %}
+                          {% if allproduct.has_next  %}
+                          <li class="page-item">
+                              <a class="page-link" href="/shop/?page={{allproduct.next_page_number}}">Next</a>
+                          </li>
+                          {% endif %}
+                      </ul>
+                  </nav>
+              </div>
+            
+          </div>
+      </div>
+
+
+    
+ {% endblock  %}
+ 
+ <div id="fb-root">Chat us</div>
+
+ <!-- Your Chat Plugin code -->
+ <div id="fb-customer-chat" class="fb-customerchat">
+ </div>
+ 
+ <script>
+   var chatbox = document.getElementById('fb-customer-chat');
+   chatbox.setAttribute("page_id", "105837708255549");
+   chatbox.setAttribute("attribution", "biz_inbox");
+ </script>
+ 
+ <!-- Your SDK code -->
+ <script>
+   window.fbAsyncInit = function() {
+     FB.init({
+       xfbml            : true,
+       version          : 'v15.0'
+     });
+   };
+ 
+   (function(d, s, id) {
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) return;
+     js = d.createElement(s); js.id = id;
+     js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+ </script>
+ 
+

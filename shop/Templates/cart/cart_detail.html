@@ -1,0 +1,111 @@
+{% extends 'shop/basic.html'  %}
+
+{% block title %}Productview {% endblock %}
+{% load cart_tag %}
+
+
+
+
+
+{% block body %}
+{% block css%} 
+<style>
+ h3{
+    text-align: center;
+    justify-content: center;
+ }
+ .form-control{
+  color: black;
+ }
+
+       
+   
+
+
+</style>
+    
+{% endblock%}
+
+
+
+
+
+<section class="h-100" style="background-color: #eee;">
+    <div class="container h-100 py-5">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-10">
+  
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3 class="fw-normal mb-0 text-black">Shopping Cart</h3>
+            <div>
+              <p class="mb-0"><span class="text-muted">Sort by:</span> <a href="#!" class="text-body">price <i
+                    class="fas fa-angle-down mt-1"></i></a></p>
+            </div>
+          </div>
+          {% for key,value in request.session.cart.items %}
+  
+          <div class="card rounded-3 mb-4">
+            <div class="card-body p-4">
+              <div class="row d-flex justify-content-between align-items-center">
+                <div class="col-md-2 col-lg-2 col-xl-2">
+                  <img
+                    src="{{value.image}}"
+                    class="img-fluid rounded-3" alt="Cotton T-shirt">
+                </div>
+                <div class="col-md-3 col-lg-3 col-xl-3">
+                  <p class="lead fw-normal mb-2">{{value.name}}</p>
+                  <p><span class="text-muted">Size: </span>M <span class="text-muted">Color: </span>Grey</p>
+                </div>
+                <div class="card-quantity col-md-3 col-lg-3 col-xl-2 d-flex">
+                  <a href="{% url 'item_increment' value.product_id %}" class="cart_quantity_up p-1">
+                    <i class="fas fa-plus"></i>
+                  </a>
+  
+                  <input id="form1" min="0" name="quantity" value={{value.quantity}} type="number"
+                    class="form-control form-control-sm" />
+  
+                    <a href="{% url 'item_decrement' value.product_id %}" class="cart_quantity_down p-1">
+                        <i class="fas fa-minus"></i>
+                  </a >
+                </div>
+                <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                  <h5 class="mb-0"> {{ value.price|multiply:value.quantity }} Tk</h5>
+                </div>
+                <div class="card-total col-md-1 col-lg-1 col-xl-1 text-end">
+                  <a href="{% url 'item_clear' key %}" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+
+          <td>
+              <td>
+                <h3>Sub total: {{cart_total_amount}} TK</h3>
+              </td>
+          </td>
+
+
+
+
+          
+          <div class="card">
+            <div class="card-body">
+              <a  href="/shop/cheackout" class="btn text-center btn-warning btn-block btn-lg">Cheackout</a>
+            </div>
+          </div>
+        
+        </div>
+      </div>
+    </div>
+    
+
+  </section>
+
+
+
+
+
+
+
+{% endblock%}

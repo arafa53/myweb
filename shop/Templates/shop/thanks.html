@@ -1,0 +1,58 @@
+{% extends 'shop/basic.html'  %}
+
+{% block title %}Service {% endblock %}
+
+
+
+
+
+{% block body %}
+{% block css%} 
+<style>
+h1,h5{
+    text-align: center;
+}
+[class^="fa-"], [class*=" fa-"] {
+    display: inline-block;
+    width: 100%;
+}
+i{
+    text-align: center;
+    width: 200px;
+    font-weight: bold;
+    color: green;
+}
+
+</style>
+    
+{% endblock%}
+
+
+
+
+{% load static %}
+
+
+
+
+	
+	
+
+	
+	<header class="site-header" id="header">
+		<h1 class="site-header__title m-4" data-lead-id="site-header-title">THANK YOU!</h1>
+	</header>
+
+	<div class="main-content">
+		<i class="fa fa-check fa-10x" aria-hidden="true"></i>
+		<h5 class="main-content__body m-4" data-lead-id="main-content-body">Thanks for your order. We will contact you shortly. Stay with us.</h5>
+	</div>
+    <div>
+        <a href="/shop/your_order">Cheack your order</a href="shop/Your_order">
+    </div>
+
+	
+
+
+
+{% endblock %}

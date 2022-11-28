@@ -1,0 +1,57 @@
+{% extends 'shop/basic.html'  %}
+
+{% block title %}Search {% endblock %}
+
+
+
+
+
+{% block body %}
+{% block css%} 
+<style>
+
+
+</style>
+    
+{% endblock%}
+
+
+
+
+{% load static %}
+
+
+
+<div class="row m-4 ">
+              
+
+              
+    {% for i in product %}
+
+      <div class="col-6 col-sm-6 col-md-6 col-lg-3">
+        
+          <div class="card">
+              <img class="card-img-top " src='/media/{{i.image}}' alt="Card image cap">
+              <div class="card-body">
+                  <h4 class="card-title">{{i.name}}</h4>
+                  <p class="card-text">{{i.des |truncatechars:50}}</p>
+                  <p class="card-text">{{i.time}}</p>
+                  <div class="row">
+                      <div class="col">
+                          <a class=" btn btn-primary" href="{% url 'cart_add' i.id %}">Add 2 cart</a>
+                         
+                          <a  class="btn btn-danger ">{{i.price}} Tk</a>
+                        </div>
+                        
+                      </div>
+                      
+                  </div>
+              </div>        
+          </div>
+          {% endfor %}
+      </div>
+
+
+
+
+{% endblock %}

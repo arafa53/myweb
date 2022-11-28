@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <title>{% block title %} {% endblock %}</title>
+    {% block css%} 
+    {% endblock%}
+    <style>
+      .dropdown:hover .dropdown-menu{
+        display: block;
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+  :root {
+    scroll-behavior: smooth;
+  }
+}
+.nav-link {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #0dfd3d;
+  text-decoration: none;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+      
+  
+      .footer{
+      background-color: #24262b;
+      padding:70px 0 ;
+    }
+    .container{
+      max-width: 1000px;
+      margin: auto;
+    }
+    ul{
+
+    list-style: none;
+  
+    }
+    .row{
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .footer-col{
+      width: 25%;
+      padding: 0 15x;
+    }
+
+    .footer-col h4{
+      font-size: 18px;
+      color: #ffffff;
+      text-transform: capitalize;
+      margin-left: 30px;
+      margin-bottom: 30px;
+      font-weight: 750;
+      position: relative;
+    }
+
+    .footer-col h4::before{
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -10px;
+      background-color: #1ee928dc;
+      height: 2px;
+      box-sizing: border-box;
+      width: 50px;
+    }
+    .footer-col ul li:not(last-child){
+      margin-bottom: 10px;
+    }
+
+    .footer-col ul li a{
+      font-size: 16px;
+      text-transform: capitalize;
+      color-interpolation-filters: #ffffff;
+      text-decoration: none;
+      font-weight: 500;
+      color: #bbbbbb;
+      display: block;
+      transition:all 0.3s ease;
+    }   
+    
+    .footer-col ul li a:hover{
+      color: #1ee928dc;
+      padding-left: 10px;
+
+    }
+    .color{
+      color: #ffffff;
+    }
+    .footer-col .social-link a{
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255, 255, 255, 0.2);
+      margin: 0 10px 30px ;
+      text-align: center;
+      border-radius: 50%;
+      line-height: 40px;
+      transition: all 0.3s ease;
+    }
+    .footer-col .social-link a:hover{
+      color: #24262b;
+      background-color: #1ee928dc;
+    }
+    .text-right{
+      text-align: right;
+      font-weight: 500;
+      margin: 10px 100px 10px 0px;
+      color: rgb(0, 0, 0);
+    }
+    
+    a{
+      text-decoration: none;
+      color: black;
+    }
+    @media (max-width: 991px) {
+  .navigation .nav-item .nav-link::before {
+    display: none;
+  }
+}
+.navigation .nav-item:hover .nav-link {
+  text-decoration: none;
+  color: #FF6A3D !important;
+}
+.navigation .nav-item:hover .nav-link::before {
+  transform: scaleX(1);
+}
+.navigation .nav-item .nav-link select {
+  font-weight: bolder;
+  font-size: 20px;
+}
+@media (max-width: 1200px) {
+  .navigation .nav-item .nav-link {
+    padding: 10px 15px !important;
+  }
+}
+.navigation .nav-item .nav-link::before {
+  position: absolute;
+  content: "";
+  font-weight: bold !important;
+  bottom: 5px;
+  left: 15px;
+  width: calc(100% - 30px);
+  height: 2px;
+  z-index: -1;
+  background-color: #FF6A3D;
+  transform: scaleX(0);
+  transition: 0.25s;
+}
+@media (min-width: 1199px) {
+  .navigation .nav-item.dropdown .nav-link::after {
+    position: absolute;
+  }
+}
+.navigation .nav-item .nav-link {
+
+  color:#1A2238;
+  margin-left: 10px;
+  font-weight: 600;
+  text-transform: capitalize;
+  position: relative;
+  z-index: 1;
+}
+.nav-link{
+  font-weight: bold;
+}
+
+badge{
+  color: black;
+}
+.ht{
+  height: 10px;
+}
+.form-control{
+ color: #0dfd3d;
+}
+.buts:hover{
+  background-color: #FF6A3D !important;
+  color: #ffffff;
+}
+.search{
+  margin-top: 10px !important;
+}
+
+
+    </style>
+    
+  </head>
+  <body>
+
+    
+    {% load static %}
+    <nav aria-label="navbar " class="ht">
+      {% if user.is_authenticated  %}
+       <p class=" text-right" aria-current="page">  Call us-01670215453 | <a>Welcome, {{user.username}} | <a href="shop/logout">Logout</a> </a>  </p>
+       {% else  %}
+       <p class=" text-right" aria-current="page">  Call us-01670215453 | <a href="/shop/my_account">My Account </a>  </p>
+       {% endif %}
+     </nav>
+    <header class="navigation bg-tertiary">
+      <nav class="navbar navbar-expand-xl   navbar-light text-center py-3">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/shop">
+            <img loading="prelaod" decoding="async" class="img-fluid" width="160" src="images/logo.png" alt="Navbar">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+              <li class="nav-item"> <a class="nav-link" href="/shop">Home</a>
+              </li>
+              {% if user.is_authenticated  %}
+              <li class="nav-item">
+                <a class="nav-link" href="/shop/cart/cart-detail/">Cart <span class="badge bg-secondary">{{request.session.cart|length}}</span></a>
+              </li>
+              {% else  %}
+              <li class="nav-item">
+                <a class="nav-link" href="/shop/my_account">Cart <span class="badge bg-secondary">{{request.session.cart|length}}</span></a>
+              </li>
+              {% endif %}
+              
+              </li>
+              <li class="nav-item "> <a class="nav-link" href="/shop/service">Services</a>
+              </li>
+
+
+                {% if user.is_authenticated  %}
+              <li class="nav-item">
+                <a class="nav-link" href="/shop/your_order">Your order</a>
+              </li>
+              {% else  %}
+              <li class="nav-item">
+                <a class="nav-link" href="/shop/my_account">Your order</a>
+              </li>
+              {% endif %}
+
+
+            <li class="nav-item "> <a class="nav-link" href="#">ContactUs</a>
+            </li>
+              <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+               
+                  <li><a class="dropdown-item " href="/shop/service">Service Details</a>
+                  </li>
+                  <li><a class="dropdown-item " href="faq.html">FAQ&#39;s</a>
+                  </li>
+                  <li><a class="dropdown-item " href="legal.html">Legal</a>
+                  </li>
+                  <li><a class="dropdown-item " href="terms.html">Terms &amp; Condition</a>
+                  </li>
+                  
+                </ul>
+              </li>
+            </ul>
+            
+          </div>
+          
+        </div>
+        <form action="/shop/search" method="get" class="d-flex search">
+            
+          <input class="form-control me-2" type="search" placeholder="Search product" aria-label="Search" name="query" id="query">
+          <button class="btn buts btn-outline-success" type="submit">Search</button>
+        </form>
+      </nav>
+    </header>
+
+
+
+
+
+    
+
+
+
+    {% block body %}
+    
+    
+    
+    
+    
+    
+    {% endblock  %}
+
+
+
+
+
+    {% block texto %}
+     
+ <div id="fb-root">Chat us</div>
+
+ <!-- Your Chat Plugin code -->
+ <div id="fb-customer-chat" class="fb-customerchat">
+ </div>
+ 
+ <script>
+   var chatbox = document.getElementById('fb-customer-chat');
+   chatbox.setAttribute("page_id", "105837708255549");
+   chatbox.setAttribute("attribution", "biz_inbox");
+ </script>
+ 
+ <!-- Your SDK code -->
+ <script>
+   window.fbAsyncInit = function() {
+     FB.init({
+       xfbml            : true,
+       version          : 'v15.0'
+     });
+   };
+ 
+   (function(d, s, id) {
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) return;
+     js = d.createElement(s); js.id = id;
+     js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+ </script>
+ 
+    
+    
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="footer-col">
+            <h4>Company</h4>
+              <ul>
+                <li><a href="#">about us</a></li>
+                <li><a href="#">Our service</a></li>
+                <li><a href="#">Privacy policy</a></li>
+                <li><a href="#">Affilliate</a></li>
+              </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Get help</h4>
+              <ul>
+                <li><a href="#">Faq</a></li>
+                <li><a href="#">Order</a></li>
+                <li><a href="#">Payment</a></li>
+              </ul>
+          </div>
+          
+          <div class="footer-col">
+            <h4>Online shop</h4>
+              <ul>
+                <li><a href="#">Watch</a></li>
+                <li><a href="#">Electronics</a></li>
+                <li><a href="#">Servicing</a></li>
+              </ul>
+          </div>
+          <div class="footer-col">
+            <h4 class="color">Social</h4>
+              <div class="social-link">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+
+              </div>
+          </div>
+        </div>
+      </div>
+      
+      
+    </footer>
+    
+    
+   
+
+
+    
+
+
+
+
+
+
+      
+      
+    
+    
+
+
+
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
+{% endblock  %}
